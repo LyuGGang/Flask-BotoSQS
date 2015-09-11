@@ -10,9 +10,9 @@ except IOError:
 
 setup(
     name="Flask-BotoSQS",
-    version='0.1.0',
+    version='0.1.1',
     py_modules=['flask_boto_sqs'],
-    author='INADA Naoki',
+    author='LyuGGang',
     author_email='me at lyuwonkyung dot com',
     url='https://github.com/LyuGGang/Flask-BotoSQS',
     description="Boto SQS integration for Flask",
