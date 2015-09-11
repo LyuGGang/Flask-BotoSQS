@@ -6,12 +6,13 @@ Flask-BotoSQS: Boto_ SQS integration for Flask_
 
 Initialize
 ----------
+::
 
     from flask_boto_sqs import FlaskBotoSQS
-
+    
     sqs = FlaskBotoSQS(app)
     
-or
+or::
 
     sqs = FlaskBotoSQS()
     sqs.init_app(app)
@@ -21,6 +22,7 @@ Configuration
 -------------
 
 Put kwargs for FlaskBotoSQS to 'FLASK_BOTO_SQS' in your Flask configuration.
+::
 
     app.config['FLASK_BOTO_SQS'] = {
         'region': 'ap-northeast-1',
@@ -31,6 +33,7 @@ Put kwargs for FlaskBotoSQS to 'FLASK_BOTO_SQS' in your Flask configuration.
 
 Usage
 -----
+::
 
     # http://docs.pythonboto.org/en/latest/ref/sqs.html
     # http://docs.pythonboto.org/en/latest/sqs_tut.html
