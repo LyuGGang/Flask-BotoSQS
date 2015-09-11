@@ -1,11 +1,7 @@
-Flask-BotoSQS: Boto_ SQS integration for Flask_
-===============================================
+# Flask-BotoSQS: [Boto](https://github.com/boto/boto) SQS integration for [Flask](https://github.com/mitsuhiko/flask)
 
-.. _Boto: https://github.com/boto/boto
-.. _Flask: https://github.com/mitsuhiko/flask
 
-Initialize
-----------
+## Initialize
 
     from flask_boto_sqs import FlaskBotoSQS
 
@@ -17,8 +13,7 @@ or
     sqs.init_app(app)
 
 
-Configuration
--------------
+## Configuration
 
 Put kwargs for FlaskBotoSQS to 'FLASK_BOTO_SQS' in your Flask configuration.
 
@@ -29,8 +24,7 @@ Put kwargs for FlaskBotoSQS to 'FLASK_BOTO_SQS' in your Flask configuration.
     }
 
 
-Usage
------
+## Usage
 
     # http://docs.pythonboto.org/en/latest/ref/sqs.html
     # http://docs.pythonboto.org/en/latest/sqs_tut.html
