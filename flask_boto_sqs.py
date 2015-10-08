@@ -1,10 +1,10 @@
 # -*- coding: utf-8 -*-
 """
-Boto SQS integration for Flask
+Boto3 SQS integration for Flask
 by LyuGGang (https://github.com/LyuGGang/Flask-BotoSQS)
 """
 import flask
-import boto.sqs
+from boto3.session import Session
 
 class FlaskBotoSQS(object):
 
@@ -30,13 +30,14 @@ class FlaskBotoSQS(object):
             raise TypeError("FLASK_BOTO_SQS conf should be dict")
 
         close_on_teardown = conf.pop('close_on_teardown', False)
-        conn = boto.sqs.connect_to_region(
-            conf['region'],
-            aws_access_key_id=conf['aws_access_key_id'],
-            aws_secret_access_key=conf['aws_secret_access_key'])
+
+        session = Session(aws_access_key_id=conf['aws_access_key_id'],
+                          aws_secret_access_key=conf['aws_secret_access_key'],
+                          region_name=conf['region'])
+        sqs = session.resource('sqs')
 
         app.extensions.setdefault('botosqs', {})
-        app.extensions['botosqs'][self] = conn
+        app.extensions['botosqs'][self] = sqs
 
         if close_on_teardown:
             @app.teardown_appcontext
@@ -45,8 +46,8 @@ class FlaskBotoSQS(object):
                 pass
 
     @property
-    def conn(self):
+    def sqs(self):
         """
-        :rtype: boto.sqs.connection
+        :rtype: boto3.resources.base.ServiceResource
         """
         return flask.current_app.extensions['botosqs'][self]
