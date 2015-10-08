@@ -1,7 +1,7 @@
-Flask-BotoSQS: Boto_ SQS integration for Flask_
+Flask-BotoSQS: Boto3_ SQS integration for Flask_
 ===============================================
 
-.. _Boto: https://github.com/boto/boto
+.. _Boto3: https://github.com/boto/boto3
 .. _Flask: https://github.com/mitsuhiko/flask
 
 Initialize
@@ -10,12 +10,12 @@ Initialize
 
     from flask_boto_sqs import FlaskBotoSQS
     
-    sqs = FlaskBotoSQS(app)
+    flask_boto_sqs = FlaskBotoSQS(app)
     
 or::
 
-    sqs = FlaskBotoSQS()
-    sqs.init_app(app)
+    flask_boto_sqs = FlaskBotoSQS()
+    flask_boto_sqs.init_app(app)
 
 
 Configuration
@@ -35,19 +35,15 @@ Usage
 -----
 ::
 
-    # http://docs.pythonboto.org/en/latest/ref/sqs.html
-    # http://docs.pythonboto.org/en/latest/sqs_tut.html
+    # https://boto3.readthedocs.org/en/latest/guide/sqs.html
 
-    q = sqs.conn.get_queue('your-queue-name')
+    q = flask_boto_sqs.sqs.get_queue_by_name(QueueName='your-queue-name')
 
     # write
-    from boto.sqs.message import Message
-    m = Message()
-    m.set_body('What a lovely day!')
-    q.write(m)
+    resp = q.send_message('What a lovely day!')
+    print resp.get('MessageId')
 
     # read
-    m = q.read()
-    res = m.get_body()
-    print res
-    q.delete_message(m)
+    for m in q.receive_messages():
+        print m.body
+        m.delete()
